@@ -1,0 +1,18 @@
+<ion-view view-title="Edit Note">
+	<ion-content>
+		<div class="list card">
+			<form name="addNote">
+				<div class="item item-input">
+					<input placeholder="Add Note Title" type="text" name="noteTitle" ng-minlength="10" maxlength="20" required ng-model="note.title">
+
+				</div>
+				<div class="item item-input">
+					<textarea placeholder="Add Description" rows="5" ng-model="note.description"></textarea>
+				</div>
+			</form>
+		</div>
+		<div class="padding">
+			<button ng-disabled=!note.title class="button button-block button-positive" ng-click="save()">Save</button>
+		</div>
+	</ion-content>
+</ion-view>
