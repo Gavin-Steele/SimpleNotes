@@ -1,6 +1,6 @@
 (function(){
 
-var app = angular.module('notes', ['ionic', 'notes.notestore']);
+var app = angular.module('notes', ['ionic', 'ngCordova', 'notes.notestore']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -24,6 +24,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 app.controller('ListCtrl', function($scope, NoteStore) {
 
+  
   $scope.reorder = false;
 
   $scope.notes = NoteStore.list();
@@ -38,9 +39,6 @@ app.controller('ListCtrl', function($scope, NoteStore) {
   $scope.toggleReordering =function(){
     $scope.reordering = !$scope.reordering;
   };
-
-
-
 });
 
 app.controller('AddCtrl', function($scope, $state, NoteStore){
@@ -58,9 +56,25 @@ app.controller('AddCtrl', function($scope, $state, NoteStore){
   };
 });
 
-app.controller('EditCtrl', function($scope, $state, NoteStore){
+app.controller('EditCtrl', function($scope, $state, $cordovaCamera, NoteStore){
   
   $scope.note = angular.copy(NoteStore.get($state.params.noteId));
+
+  $scope.pictureUrl = 'http://placehold.it/200x200';
+
+  $scope.takePicture = function() {
+    var options = {
+      destinationType: Camera.DestinationType.DATA_URL,
+      encodingType: Camera.EncodingType.JPEG
+    }
+    $cordovaCamera.getPicture(options)
+      .then(function(data) {
+        //console.log('camera data: ' + angular.toJson(data));
+        $scope.pictureUrl = 'data:image/jpeg;base64,' + data;
+      }, function(error) {
+        console.log('camera error: ' + angular.toJson(error));
+      });
+  };
 
   $scope.save = function(){
     NoteStore.update($scope.note);

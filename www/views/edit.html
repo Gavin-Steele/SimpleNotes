@@ -2,13 +2,23 @@
 	<ion-content>
 		<div class="list card">
 			<form name="addNote">
+				
+				  <div class="item full-image">
+				    <img ng-model="note.pictureUrl" ng-src="{{pictureUrl}}">
+				  </div>
+				  <div class="padding">
+				    <button ng-click="takePicture()" class="button button-calm">Take Picture</button>
+				  </div>
+				
+
 				<div class="item item-input">
 					<input placeholder="Add Note Title" type="text" name="noteTitle" ng-minlength="10" maxlength="20" required ng-model="note.title">
-
 				</div>
+
 				<div class="item item-input">
 					<textarea placeholder="Add Description" rows="5" ng-model="note.description"></textarea>
 				</div>
+
 			</form>
 		</div>
 		<div class="padding">

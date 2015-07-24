@@ -1,8 +1,11 @@
 <ion-view view-title="Notes" ng-controller="ListCtrl">
 	<ion-content>
 	      <ion-list show-reorder="reordering">
-	        <ion-item class="item-remove-animate item-icon-right"
+	        <ion-item class="item-avatar-left item-remove-animate item-icon-right"
 	        href="#/edit/{{note.id}}" ng-repeat="note in notes track by note.id">
+	          
+	          <img ng-src="{{note.pictureUrl}}">
+	          
 	          <h2>{{note.title}}</h2>
 	          <p>{{note.description}}</p>
 	          <i class="icon ion-arrow-right-b"></i>
